@@ -1,5 +1,5 @@
 require 'json'
-require 'open-uri'
+require 'net/http'
 
 module GoogleTimezone
 
@@ -48,7 +48,7 @@ module GoogleTimezone
     end
 
     def get_result(params)
-      open(url(params)) { |r| JSON.parse(r.read) }
+      JSON.parse Net::HTTP.get(URI(url(params)))
     end
   end
 end
